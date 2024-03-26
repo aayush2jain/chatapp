@@ -1,0 +1,3 @@
+socket.emit-new user
+socket.broadcast.emit-already existing users
+io.sockets.emit-for all users
