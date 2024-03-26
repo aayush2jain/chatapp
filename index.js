@@ -7,7 +7,8 @@ const http =require('http').Server(app);
 var io =require('socket.io')(http);
 app.set('view engine','ejs');
 app.set('views','./')
-http.listen(3000,()=>{
+const port=process.env.port || 3000;
+http.listen(port,()=>{
     console.log('server is running');
 });
 var users=[];
