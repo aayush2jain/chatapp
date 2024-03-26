@@ -5,12 +5,16 @@ const app = express();
 const path = require('path');
 const http =require('http').Server(app);
 var io =require('socket.io')(http);
-app.set('view engine','ejs');
-app.set('views', path.join(__dirname, 'path/to/views'));
-const port=process.env.port || 3000;
-http.listen(port,()=>{
-    console.log('server is running');
-});
+http.listen(3000,function(){
+console.log('serve is connected');
+})
+app.get('/',function(req,res){
+    var options ={
+        root:path.join(__dirname)
+    }
+    var filename ='index.html'
+    res.sendFile(filename,options);
+})
 var users=[];
 var roomno=0;
 io.on('connection',function(socket){
