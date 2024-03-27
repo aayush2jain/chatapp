@@ -5,15 +5,15 @@ const app = express();
 const path = require('path');
 const http =require('http').Server(app);
 var io =require('socket.io')(http);
-http.listen(3000,function(){
+const PORT=process.env.PORT || 3000;
+http.listen(PORT,function(){
 console.log('serve is connected');
 })
+app.set('view engine','ejs')
+app.set('views',path.join(__dirname,'views'));
+app.use(express.static(__dirname +'/public'));
 app.get('/',function(req,res){
-    var options ={
-        root:path.join(__dirname)
-    }
-    var filename ='index.html'
-    res.sendFile(filename,options);
+   res.render('index');
 })
 var users=[];
 var roomno=0;
@@ -42,6 +42,4 @@ io.on('connection',function(socket){
      io.sockets.emit('user-connect',{username:data});//broadcast properly work nahi ker rha tha
     });
 });
-app.get('/',function(req,res){
-    res.render('hello');
-})
+
