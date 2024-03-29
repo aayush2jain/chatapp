@@ -29,6 +29,7 @@ io.on('connection',function(socket){
     }
     else{
         users.push(data);
+        
         socket.emit('set-user',{username:data});
     }
     // socket.on('disconnect',function(data){
